@@ -194,7 +194,15 @@ export const getTransactionStatus = (date: Date) => {
   return date > twoDaysAgo ? "Processing" : "Success";
 };
 
-export const authFormSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-})
+export const authFormSchema = (type : string) => z.object({
+  firstname: type === "sign-in" ? z.string().optional() : z.string().min(1, "First name is required"), // Required and must not be empty
+  lastname: type === "sign-in" ? z.string().optional() : z.string().min(1, "Last name is required"), // Required and must not be empty
+  address: type === "sign-in" ? z.string().optional() : z.string().min(1, "Address is required"), // Required and must not be empty
+  state: type === "sign-in" ? z.string().optional() : z.string().length(2, "State must be a valid 2-letter code"), // Ensure state is a valid 2-letter code
+  postalcode: type === "sign-in" ? z.string().optional() : z.string().regex(/^\d{6}$/, "Postal Code must be 6 digits"), // Postal Code must be 5 digits
+  dob: type === "sign-in" ? z.string().optional() : z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date of Birth must be in the format yyyy-mm-dd"), // YYYY-MM-DD format validation
+  ssn: type === "sign-in" ? z.string().optional() : z.string().regex(/^\d{11}$/, "SSN must be last 11 digits"), // SSN as last 4 digits
+  //both
+  email: z.string().email("Please enter a valid email"), // Email validation
+  password: z.string().min(8, "Password must be at least 8 characters long") // Password min length 8
+});

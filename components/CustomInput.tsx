@@ -17,19 +17,21 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Control } from 'react-hook-form'
-import {z} from "zod"
 import { authFormSchema } from '@/lib/utils'
 import { FieldPath } from 'react-hook-form'
 
+const formSchema = authFormSchema("sign-up");
+
 interface CustomInput {
-  form : Control<z.infer<typeof authFormSchema>>,
-  name: FieldPath<z.infer<typeof authFormSchema>>,
+  control : Control<z.infer<typeof formSchema>>,
+  name: FieldPath<z.infer<typeof formSchema>>,
   label : string,
   placeholder: string
+  type? : string;
 
 }
 
-const CustomInput = ({control, name , label , placeholder,type}) => {
+const CustomInput = ({control, name , label , placeholder,type}: CustomInput) => {
   return (
     <div>
       <FormField
@@ -48,7 +50,6 @@ const CustomInput = ({control, name , label , placeholder,type}) => {
                         />
                       </FormControl>
                       <FormMessage className='mt-2 form-message '/>
-
                 </div>      
            </div>
          )}
