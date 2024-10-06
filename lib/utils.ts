@@ -195,13 +195,13 @@ export const getTransactionStatus = (date: Date) => {
 };
 
 export const authFormSchema = (type : string) => z.object({
-  firstname: type === "sign-in" ? z.string().optional() : z.string().min(1, "First name is required"), // Required and must not be empty
-  lastname: type === "sign-in" ? z.string().optional() : z.string().min(1, "Last name is required"), // Required and must not be empty
-  address: type === "sign-in" ? z.string().optional() : z.string().min(1, "Address is required"), // Required and must not be empty
+  firstName: type === "sign-in" ? z.string().optional() : z.string().min(1, "First name is required"), // Required and must not be empty
+  lastName: type === "sign-in" ? z.string().optional() : z.string().min(1, "Last name is required"), // Required and must not be empty
+  address1: type === "sign-in" ? z.string().optional() : z.string().min(1, "Address is required"), // Required and must not be empty
   city: type === "sign-in" ? z.string().optional() : z.string().min(1, "City is required"),
   state: type === "sign-in" ? z.string().optional() : z.string().length(2, "State must be a valid 2-letter code"), // Ensure state is a valid 2-letter code
-  postalcode: type === "sign-in" ? z.string().optional() : z.string().regex(/^\d{6}$/, "Postal Code must be 6 digits"), // Postal Code must be 5 digits
-  dob: type === "sign-in" ? z.string().optional() : z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date of Birth must be in the format yyyy-mm-dd"), // YYYY-MM-DD format validation
+  postalCode: type === "sign-in" ? z.string().optional() : z.string().regex(/^\d{6}$/, "Postal Code must be 6 digits"), // Postal Code must be 5 digits
+  dateofbirth: type === "sign-in" ? z.string().optional() : z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date of Birth must be in the format yyyy-mm-dd"), // YYYY-MM-DD format validation
   ssn: type === "sign-in" ? z.string().optional() : z.string().regex(/^\d{11}$/, "SSN must be last 11 digits"), // SSN as last 4 digits
   //both
   email: z.string().email("Please enter a valid email"), // Email validation

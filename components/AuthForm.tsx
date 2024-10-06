@@ -22,15 +22,15 @@ import CustomInput from './CustomInput';
 import { Loader2 } from 'lucide-react';
 import { authFormSchema } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
-import { signIn, signUp } from '@/lib/actions/user.actions';
+import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions';
 
 const formSchema = z.object({
   email: z.string().email(),})
 
 const AuthForm = ({type}: {type : string}) => {
-
-  const router = useRouter();
   
+  
+  const router = useRouter();
   const [user,setUser] = useState(null)
   const [isLoading, setisLoading] = useState(false);
 
@@ -59,12 +59,12 @@ const AuthForm = ({type}: {type : string}) => {
         }
        
         if(type === "sign-in"){
-          const response = await signIn({
-            email: data.email,
-            password: data.password,
-          })
+          // const response = await signIn({
+          //   email: data.email,
+          //   password: data.password,
+          // })
 
-          if(response) router.push("/")
+          // if(response) router.push("/")
         }
 
       } catch (error) {
@@ -154,13 +154,13 @@ const AuthForm = ({type}: {type : string}) => {
                 <div className='flex gap-4'>
                   <CustomInput
                     control={form.control}
-                    name="firstname"
+                    name="firstName"
                     label="First Name"
                     placeholder="Enter your First Name"
                   />
                   <CustomInput
                     control={form.control}
-                    name="lastname"
+                    name="lastName"
                     label="Last Name"
                     placeholder="Enter your Last Name"
                   />
@@ -168,7 +168,7 @@ const AuthForm = ({type}: {type : string}) => {
 
                 <CustomInput
                   control={form.control}
-                  name="address"
+                  name="address1"
                   label="Address"
                   placeholder="Enter your specific address"
                 />
@@ -187,7 +187,7 @@ const AuthForm = ({type}: {type : string}) => {
                   />
                   <CustomInput
                     control={form.control}
-                    name="postalcode"
+                    name="postalCode"
                     label="Postal Code"
                     placeholder="ex: 11101"
                   />
@@ -196,7 +196,7 @@ const AuthForm = ({type}: {type : string}) => {
               <div className="flex gap-4">
                 <CustomInput
                   control={form.control}
-                  name="dob"
+                  name="dateofbirth"
                   label="Date of Birth"
                   placeholder="yyyy-mm-dd"
                 />
